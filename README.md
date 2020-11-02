@@ -1,11 +1,8 @@
 Windows Server 2016 DISA STIG
 =========
+Configure a Windows Server 2016 system to be DISA STIG compliant. All findings will be audited by default. Non-disruptive CAT I, CAT II, and CAT III findings will be corrected by default.
 
-[![pipeline status](https://gitlab.com/mindpointgroup/lockdown-enterprise/rwin-2k16-stig/badges/master/pipeline.svg)](https://gitlab.com/mindpointgroup/lockdown-enterprise/win-2k16-stig/commits/master)
-
-Configure a Windows Server 2016 system to be DISA STIG compliant. All findings will be audited by default. Non-disruptive CAT I, CAT II, and CAT III findings will be corrected by default. ~Disruptive finding remediation can be enabled by setting `rhel7stig_disruption_high` to `yes`.~ _To be implemented_
-
-This role is based on Windows Server 2016 DISA STIG: [Version 1, Rel 9 released on July 26, 2019](https://dl.dod.cyber.mil/wp-content/uploads/stigs/zip/U_MS_Windows_Server_2016_V1R9_STIG.zip).
+This role is based on Windows Server 2016 DISA STIG: Version 1, Rel 12 released on June 17, 2020.
 
 Requirements
 ------------
@@ -19,11 +16,9 @@ The following packages must be installed on the controlling host/host where ansi
 
 - passlib (or python2-passlib, if using python2)
 - python-lxml
-- python-xmltodict
 - python-jmespath
 - pywinrm
 
-Package 'python-xmltodict' is required if you enable the OpenSCAP tool installation and run a report. Packages python(2)-passlib and python-jmespath are required for tasks with custom filters or modules. These are all required on the controller host that executes Ansible.
 
 Role Variables
 --------------
@@ -42,9 +37,12 @@ Example Playbook
 
 Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
 
-    - hosts: servers
+    - Name: Configure Windows Server 2016 System
+      hosts: servers
+      vars_files:
+        - vars.yml
       roles:
-         - role: win-2k16-stig
+         - role: Windows-2016-STIG
            when:
                 - ansible_os_family == 'Windows'
                 - ansible_distribution | regex_search('(Server 2016)')
