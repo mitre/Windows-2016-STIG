@@ -3603,8 +3603,8 @@
         win_shell: echo true
         changed_when: no
   when:
-      - wn16_dc_000430
-      - ansible_windows_domain_role == "Primary domain controller"
+    - wn16_dc_000430
+    - ansible_windows_domain_role == "Primary domain controller"
   tags:
       - WN16-DC-000430
       - win2k16_disruption_high
@@ -3620,9 +3620,30 @@
       - debug:
             var: wn16_00_000300_audit.stdout_lines
   when:
-      - wn16_00_000300
+    - wn16_00_000300
   tags:
-      - WN16-00-000300
-      - SV-87929r1
-      - notimplemented
-      - notest
+    - WN16-00-000300
+    - SV-87929r1
+    - notimplemented
+    - notest
+- name: "MEDIUM | WN16-CC-000421 | The Windows Explorer Preview pane must be disabled for Windows Server 2016."
+  block:
+      - name: "MEDIUM | WN16-CC-000421 | The Windows Explorer Preview pane must be disabled for Windows Server 2016 - NoPreviewPane"
+        win_regedit:
+            path: HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer
+            state: present
+            value: NoPreviewPane
+            data: 1
+            datatype: dword
+      - name: "MEDIUM | WN16-CC-000421 | The Windows Explorer Preview pane must be disabled for Windows Server 2016 - NoReadingPane"
+        win_regedit:
+            path: HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer
+            state: present
+            value: NoReadingPane
+            data: 1
+            datatype: dword
+  when:
+    - wn16_cc_000421
+  tags:
+    - WN16-CC-000421
+    - SV-111573r1
