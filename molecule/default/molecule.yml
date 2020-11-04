@@ -1,0 +1,19 @@
+---
+dependency:
+  name: galaxy
+driver:
+  name: vagrant
+  provider:
+    name: virtualbox
+lint:
+  name: yamllint
+platforms:
+  - name: instance
+    box: tas50/windows_2016
+provisioner:
+  name: ansible
+  lint:
+    name: ansible-lint
+verifier:
+  name: inspec
+  enabled: false
