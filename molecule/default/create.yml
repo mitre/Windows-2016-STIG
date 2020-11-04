@@ -1,3 +1,4 @@
+---
 - name: Create
   hosts: localhost
   connection: local
@@ -9,7 +10,7 @@
     molecule_yml: "{{ lookup('file', molecule_file) | molecule_from_yaml }}"
   tasks:
     - name: Create molecule instance(s)
-      molecule_vagrant:
+      vagrant:
         instance_name: "{{ item.name }}"
         instance_interfaces: "{{ item.interfaces | default(omit) }}"
         instance_raw_config_args: "{{ item.instance_raw_config_args | default(omit) }}"
