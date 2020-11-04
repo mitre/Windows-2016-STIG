@@ -35,7 +35,10 @@ jobs:
           cd ../
           ls -lart
           mv Windows-2016-STIG kclinden.windows-2016-stig
+          ls -lart
           cd kclinden.windows-2016-stig
+          pwd
+          ls -lart
       - name: Test with molecule
         run: |
           molecule test
