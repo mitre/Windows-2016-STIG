@@ -5,14 +5,14 @@ driver:
   name: vagrant
   provider:
     name: virtualbox
-lint:
-  name: yamllint
+lint: |
+  yamllint .
+  ansible-lint
 platforms:
   - name: instance
     box: tas50/windows_2016
 provisioner:
-  lint:
-    name: ansible-lint
+  name: ansible
 verifier:
   name: inspec
   enabled: false

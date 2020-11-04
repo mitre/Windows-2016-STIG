@@ -1,5 +1,5 @@
 ansible==2.9
 ansible-lint
-molecule=2.22
+molecule
 molecule-vagrant
 molecule-inspec
