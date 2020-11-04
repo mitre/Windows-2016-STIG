@@ -31,4 +31,4 @@ jobs:
           pip install -r requirements.txt
       - name: Test with molecule
         run: |
-          molecule teset
+          molecule test
