@@ -3,3 +3,4 @@ ansible-lint
 molecule
 molecule-vagrant
 molecule-inspec
+python-vagrant
