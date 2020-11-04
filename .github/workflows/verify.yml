@@ -29,6 +29,12 @@ jobs:
           brew cask install chef/chef/inspec
           python -m pip install --upgrade pip
           pip install -r requirements.txt
+      - name: Prepare Module
+        run: |
+          ls -lart
+          cd ../
+          mv Windows-2016-STIG kclinden.windows-2016-stig
+          cd kclinden.windows-2016-stig
       - name: Test with molecule
         run: |
           molecule test
