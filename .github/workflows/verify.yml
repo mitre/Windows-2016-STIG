@@ -20,6 +20,12 @@ jobs:
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v1
+      - name: Setup Cache
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/.vagrant.d/
+          key: boxes/**
       - name: Set up Python
         uses: actions/setup-python@v1
         with:
