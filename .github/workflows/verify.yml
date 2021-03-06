@@ -1,0 +1,43 @@
+---
+name: Verify the Role using Molecule and Vagrant
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+  release:
+    types:
+      - published
+
+jobs:
+  build:
+
+    runs-on: macos-latest
+    strategy:
+      matrix:
+        python-version: [3.7]
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v1
+      - name: Setup Cache
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/.vagrant.d/
+          key: boxes/**
+      - name: Set up Python
+        uses: actions/setup-python@v1
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install dependencies
+        run: |
+          #brew cask install chef/chef/inspec
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+      - name: Lint with molecule
+        run: molecule lint
+        env:
+          PY_COLORS: 1
+          ANSIBLE_FORCE_COLOR: 1
+          OBJC_DISABLE_INITIALIZE_FORK_SAFETY: YES
